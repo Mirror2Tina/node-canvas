@@ -3,7 +3,7 @@
     ['OS=="win"', {
       'variables': {
         'GTK_Root%': 'C:/GTK', # Set the location of GTK all-in-one bundle
-        'with_jpeg%': 'false',
+        'with_jpeg%': 'true',
         'with_gif%': 'false',
         'with_pango%': 'false',
         'with_freetype%': 'false'
@@ -33,6 +33,8 @@
               '<(GTK_Root)/bin/libfreetype-6.dll',
               '<(GTK_Root)/bin/libpng14-14.dll',
               '<(GTK_Root)/bin/zlib1.dll',
+              '<(jpeg_root)/bin/turbojpeg.dll',
+              '<(jpeg_root)/bin/jpeg62.dll',
             ]
           }]
         }]
@@ -59,7 +61,8 @@
           ],
           'include_dirs': [
             '<(GTK_Root)/include',
-            '<(GTK_Root)/include/cairo',
+            '<(GTK_Root)/include/cairo',         
+            '<(jpeg_root)/include',
           ],
           'defines': [
             'snprintf=_snprintf',
@@ -141,7 +144,7 @@
           'conditions': [
             ['OS=="win"', {
               'libraries': [
-                '-l<(GTK_Root)/lib/jpeg.lib'
+                '-l<(jpeg_root)/lib/jpeg.lib'
               ]
             }, {
               'libraries': [
